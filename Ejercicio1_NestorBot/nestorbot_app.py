@@ -1,15 +1,14 @@
-from slack import WebClient
+import slack 
 from nestorbot import NestorBot
 import os
+from pathlib import Path
+from dotenv import load_dotenv
 
-# Create a slack client
-slack_web_client = WebClient(token=os.environ.get("SLACK_TOKEN"))
 
-# Get a new NestorBot
-nestor_bot = NestorBot("#private-playground")
+env_path = Path('.') / '.env'
+load_dotenv(dotenv_path=env_path)
 
-# Get the onboarding message payload
-message = nestor_bot.get_message_payload()
+client = slack.WebClient(token=os.environ['SLACK_TOKEN'])
 
-# Post the onboarding message in Slack
-slack_web_client.chat_postMessage(**message)
+client.chat_postMessage(channel='#test', text="HELLO WOOORLD!!!")
+
