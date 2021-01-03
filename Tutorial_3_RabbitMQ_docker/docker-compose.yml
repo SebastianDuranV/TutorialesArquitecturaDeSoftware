@@ -1,0 +1,48 @@
+version: '3.6'  
+services:
+  rabbitmq:
+   image: rabbitmq:3-management
+   ports:
+      # The standard AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+   networks:
+      - network
+   container_name: rabbitmq
+   restart: 'always'
+
+  consumidor_wiki:
+   build:
+      context: ./consumidor_wiki
+   container_name: consumidor_wiki
+   networks:
+      - network
+   environment:
+      - RABBITMQ_HOST=rabbitmq
+   depends_on:
+      - rabbitmq
+
+  consumidor_youtube:
+   build:
+      context: ./consumidor_youtube
+   container_name: consumidor_youtube
+   networks:
+      - network
+   environment:
+      - RABBITMQ_HOST=rabbitmq
+   depends_on:
+      - rabbitmq
+
+  productor:
+   build:
+     context: ./productor
+   container_name: productor
+   environment:
+      - RABBITMQ_HOST=rabbitmq
+   depends_on:
+      - rabbitmq   
+   networks:
+      - network
+networks:
+  network: {}
