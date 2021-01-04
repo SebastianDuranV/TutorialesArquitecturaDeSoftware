@@ -19,9 +19,4 @@ slack_web_client = WebClient(token=os.environ.get("SLACK_TOKEN"))
 # Post the onboarding message in Slack
 #slack_web_client.chat_postMessage(**message)
 
-
-
-
-
-
-slack_web_client.chat_postMessage(channel='#general',text="Holanda")
+slack_web_client.chat_postMessage(channel='#test',text="Holanda")
