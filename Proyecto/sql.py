@@ -33,7 +33,7 @@ mycursor.execute('CREATE TABLE usuario (idusuario INT  AUTO_INCREMENT , PRIMARY 
 mycursor.execute('CREATE TABLE canal (idcanal INT  AUTO_INCREMENT , PRIMARY KEY (idcanal), nombreCanal VARCHAR(30));')
 
 # MENSAJE
-mycursor.execute('CREATE TABLE mensaje (idmensaje INT  AUTO_INCREMENT , PRIMARY KEY (idmensaje), contenido VARCHAR(30)'
+mycursor.execute('CREATE TABLE mensaje (idmensaje INT  AUTO_INCREMENT , PRIMARY KEY (idmensaje), contenido VARCHAR(300)'
                 +',data DATETIME'
                 +',idusuario int, FOREIGN KEY (idusuario) REFERENCES usuario(idusuario)'
                 +',idcanal int, FOREIGN KEY (idcanal) REFERENCES canal(idcanal));')

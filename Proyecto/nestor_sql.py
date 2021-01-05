@@ -11,20 +11,37 @@ def main():
 
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
-    channel.queue_declare(queue='writer')
+    channel.queue_declare(queue='read')
 
 
     def callback(ch, method, properties, body):
-        print(body)
-        #return consultaSql(body)
+        answer = body.decode().split(',')
+        nestor = NestorBot(answer[0],answer[1])
+        consult = nestor.get_message_payload(answer[2])
+        print(consult)
 
-    channel.basic_consume(queue='writer', on_message_callback=callback, auto_ack=True)
+        if consult != "OK ++":
+            connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+            channel = connection.channel()
+            channel.queue_declare(queue='writer')
+
+            for i in consult:
+                p = ""
+                for j in i:
+                    p += str(j) + ","
+                channel.basic_publish(exchange='',routing_key='writer',body=p)
+
+        #for i in answer:
+        #    channel.basic_publish(exchange='',routing_key='writer',body=i)
+        
+
+    channel.basic_consume(queue='read', on_message_callback=callback, auto_ack=True)
     channel.start_consuming()
 
-    if answer != -1:
-        channel.basic_publish(exchange='',
-                        routing_key='write',
-                        body=answer)
+    #if answer != -1:
+    #    channel.basic_publish(exchange='',
+     #                   routing_key='write',
+    #                    body=answer)
 
 
 # Bucle
