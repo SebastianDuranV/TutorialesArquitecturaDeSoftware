@@ -21,7 +21,7 @@
         <th scope="row">{{ i.id }}</th>
         <td>{{ i.username }}</td>
         <td>{{ i.email }}</td>
-        <td><button type="button" class="btn btn-primary" href="/user/{{i.username}}">Go</button> <button type="button" class="btn btn-info" href="/upUser/{{i.username}}">Update</button> <button type="button" class="btn btn-danger" href="/deleteUser/{{i.username}}">Delete</button></td>
+        <td><a role="button" class="btn btn-primary" href="/user/{{i.username}}">Go</a> <a role="button" class="btn btn-info" href="/upUser/{{i.username}}">Update</a> <a role="button" class="btn btn-danger" href="/deleteUser/{{i.username}}">Delete</a></td>
     </tr>
     {%endfor%} 
    </tbody>
@@ -48,7 +48,7 @@
         <td>{{ i.pub_date }}</td>
         <td>{{ i.category }}</td>
         <td>{{ i.user }}</td>
-        <td><button type="button" class="btn btn-primary" href="/post/{{i.id}}">Go</button> <button type="button" class="btn btn-info" href="/deletePost/{{i.id}}">Update</button> <button type="button" class="btn btn-danger" href="/upPost/{{i.id}}">Delete</button></td>
+        <td><a role="button" class="btn btn-primary" href="/post/{{i.id}}">Go</a> <a role="button" class="btn btn-info" href="/upPost/{{i.id}}">Update</a> <a role="button" class="btn btn-danger" href="/deletePost/{{i.id}}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>
@@ -68,7 +68,7 @@
     <tr class="table-primary">
         <th scope="row">{{ i.id }}</th>
         <td>{{ i.name }}</td>
-        <td> <button type="button" class="btn btn-info" href="/upCategory/{{i.id}}">Update</button> <button type="button" class="btn btn-danger" href="/deleteCategory/{{i.id}}">Delete</button></td>
+        <td> <a role="button" class="btn btn-info" href="/upCategory/{{i.id}}">Update</a> <a role="button" class="btn btn-danger" href="/deleteCategory/{{i.id}}">Delete</a></td>
     </tr>
     {% endfor %}
 </table>
