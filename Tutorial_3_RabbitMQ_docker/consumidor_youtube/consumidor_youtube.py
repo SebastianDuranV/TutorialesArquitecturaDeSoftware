@@ -2,13 +2,15 @@
 from apiclient.discovery import build
 import pika, sys, os
 
+HOST = os.environ['RABBITMQ_HOST']
+
 def main():
 
     api_key="AIzaSyDXLgOVJ-tvumVea3VH7af6wQI0WLAZYXs"
     youtube = build('youtube','v3', developerKey=api_key)
 
     #Conexión al servidor RabbitMQ   
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host=HOST))
     channel = connection.channel()
 
     #Nos aseguramos que existe una cola 'hello'
